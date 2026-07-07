@@ -9,10 +9,12 @@ const initialForm = {
   notes: "",
 };
 
-// Swap this for a real endpoint when ready (e.g. a Formspree form ID,
-// or your own serverless function) — the fetch below already POSTs
-// the full payload as JSON, so wiring a real backend is a one-line change.
-const BOOKING_ENDPOINT = "";
+// FormSubmit.co forwards this POST straight to the cart's inbox — no backend
+// or account needed. IMPORTANT: the first submission triggers a one-time
+// confirmation email to mammamiaicytreats@gmail.com that must be clicked to
+// activate delivery; until then submissions are silently dropped.
+const BOOKING_EMAIL = "mammamiaicytreats@gmail.com";
+const BOOKING_ENDPOINT = `https://formsubmit.co/ajax/${BOOKING_EMAIL}`;
 
 export default function BookingForm() {
   const [form, setForm] = useState(initialForm);
@@ -30,20 +32,24 @@ export default function BookingForm() {
     setStatus("submitting");
 
     try {
-      if (BOOKING_ENDPOINT) {
-        const res = await fetch(BOOKING_ENDPOINT, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(form),
-        });
-        if (!res.ok) throw new Error("Request failed");
-      } else {
-        // eslint-disable-next-line no-console
-        console.log("Booking request submitted:", form);
-      }
+      const res = await fetch(BOOKING_ENDPOINT, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          _subject: `New Mamma Mia booking request — ${form.eventType}`,
+          Name: form.name,
+          Phone: form.phone,
+          "Event date": form.eventDate,
+          "Event type": form.eventType,
+          Notes: form.notes,
+        }),
+      });
+      if (!res.ok) throw new Error("Request failed");
       setStatus("sent");
     } catch (err) {
-      setError("Something went wrong sending your request. Please try again or call us directly.");
+      setError(
+        `Something went wrong sending your request. Please try again or email us directly at ${BOOKING_EMAIL}.`
+      );
       setStatus("idle");
     }
   }
