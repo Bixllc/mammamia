@@ -24,7 +24,7 @@ export default function Gallery() {
             <img
               src="/img/gallery-1.webp"
               alt="The Mamma Mia popsicle cart parked beside palm trees, side view"
-              className="h-64 w-full rounded-card-lg object-cover shadow-lift sm:h-80"
+              className="h-auto w-full rounded-card-lg object-contain shadow-lift"
               loading="lazy"
             />
           </div>
@@ -34,13 +34,13 @@ export default function Gallery() {
             <img
               src="/img/gallery-2.webp"
               alt="The Mamma Mia popsicle cart in a sunny parking lot, front view"
-              className="h-64 w-full rounded-card-lg object-cover shadow-lift sm:h-[19.5rem]"
+              className="h-auto w-full rounded-card-lg object-contain shadow-lift"
               loading="lazy"
             />
             <img
               src="/img/gallery-3.webp"
               alt="The Mamma Mia popsicle cart set up under trees at an event"
-              className="h-64 w-full rounded-card-lg object-cover shadow-lift sm:h-[19.5rem]"
+              className="h-auto w-full rounded-card-lg object-contain shadow-lift"
               loading="lazy"
             />
           </div>
