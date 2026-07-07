@@ -13,10 +13,10 @@ export default function Footer() {
             <h2 className="font-display text-lg font-bold text-cream">Get in touch</h2>
             <p className="mt-3">
               <a
-                href="tel:+13056845170"
+                href="mailto:mammamiaicytreats@gmail.com"
                 className="text-cream/90 underline decoration-gold/50 underline-offset-4 transition-colors hover:text-gold"
               >
-                (305) 684-5170
+                mammamiaicytreats@gmail.com
               </a>
             </p>
           </div>
