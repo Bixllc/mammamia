@@ -9,12 +9,11 @@ const initialForm = {
   notes: "",
 };
 
-// FormSubmit.co forwards this POST straight to the cart's inbox — no backend
-// or account needed. IMPORTANT: the first submission triggers a one-time
-// confirmation email to mammamiaicytreats@gmail.com that must be clicked to
-// activate delivery; until then submissions are silently dropped.
+// Posts to the /api/book serverless function (see api/book.js), which sends
+// the email via Resend. Requires RESEND_API_KEY and BOOKING_FROM_EMAIL to be
+// set as environment variables wherever this is deployed.
 const BOOKING_EMAIL = "mammamiaicytreats@gmail.com";
-const BOOKING_ENDPOINT = `https://formsubmit.co/ajax/${BOOKING_EMAIL}`;
+const BOOKING_ENDPOINT = "/api/book";
 
 export default function BookingForm() {
   const [form, setForm] = useState(initialForm);
@@ -34,15 +33,8 @@ export default function BookingForm() {
     try {
       const res = await fetch(BOOKING_ENDPOINT, {
         method: "POST",
-        headers: { "Content-Type": "application/json", Accept: "application/json" },
-        body: JSON.stringify({
-          _subject: `New Mamma Mia booking request — ${form.eventType}`,
-          Name: form.name,
-          Phone: form.phone,
-          "Event date": form.eventDate,
-          "Event type": form.eventType,
-          Notes: form.notes,
-        }),
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
       });
       if (!res.ok) throw new Error("Request failed");
       setStatus("sent");

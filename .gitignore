@@ -3,3 +3,6 @@ dist
 .DS_Store
 assets/source
 .claude
+.vercel
+.env
+.env.local
