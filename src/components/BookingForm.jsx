@@ -88,7 +88,7 @@ export default function BookingForm() {
         Tell us a bit about your event and we'll follow up with availability.
       </p>
 
-      <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
+      <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 [&>div]:min-w-0">
         <div className="sm:col-span-2">
           <label htmlFor="name" className="block text-sm font-medium text-ink">
             Name
@@ -132,7 +132,7 @@ export default function BookingForm() {
             required
             value={form.eventDate}
             onChange={handleChange}
-            className="mt-1.5 block w-full rounded-lg border border-cream-dark bg-white px-3.5 py-2.5 text-ink shadow-sm focus:border-green-mid focus:outline-none"
+            className="mt-1.5 block w-full min-w-0 rounded-lg border border-cream-dark bg-white px-3.5 py-2.5 text-ink shadow-sm focus:border-green-mid focus:outline-none"
           />
         </div>
 
